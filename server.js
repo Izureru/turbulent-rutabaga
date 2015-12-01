@@ -20,7 +20,14 @@ app.get(users_path, (req, res) => {
     res.send(users)
 })
 
+app.delete(users_path, (req, res) => {
+    users = []
+    res.send('OK')
+})
+
 app.post(users_path, (req, res) => {
+    console.log("BODY INCOMING")
+    console.log(req)
     let user = req.body.user
     if (user && user.name) {
         users.push({

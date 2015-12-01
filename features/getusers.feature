@@ -1,15 +1,25 @@
-Feature: Get message data
-  As a system I want to see all messages
+Feature: Users management
+  As an admin, I want to manage users
 
-Scenario: Try to add user without name
+Scenario: Get root
     Given I send a GET request to "/"
     Then the response status should be "200"
+    And the response body should contain "Hello TDD!"
 
-Scenario: Try to add a user
-	Given I send a POST request to "/" with the following: "name":"Albert"
-  	When I send a GET request to "/"
-  	Then the JSON response should have "users" with a length of 1
+Scenario: Add user
+	Given I send a POST request to "/users" with the following:
+    | user | body |
+  Then the response status should be "200"
+  When I send a GET request to "/"
+  And the response body should contain "1 tdd users"
 
+Scenario: Delete users clears users
+  Given I send a DELETE request to "/users"
+  And I send a GET request to "/users"
+  Then the JSON response should be: 
+  """
+  []
+  """ 
   # Scenario: Adding a user with a name
   #   Given user1 exists
   #   When I send a GET request to "/"
