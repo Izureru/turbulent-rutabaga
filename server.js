@@ -8,7 +8,8 @@ const root_path = '/'
 const users_path = '/users'
 
 let app = express()
-app.use(bodyParser.json())
+// app.use(bodyParser.json());
+app.use(bodyParser.json({ type: '*/*' }));
 
 let users = []
 
@@ -27,8 +28,8 @@ app.delete(users_path, (req, res) => {
 
 app.post(users_path, (req, res) => {
     console.log("BODY INCOMING")
-    console.log(req)
-    let user = req.body.user
+    console.log(req.body)
+    let user = req.body
     if (user && user.name) {
         users.push({
             name: user.name
