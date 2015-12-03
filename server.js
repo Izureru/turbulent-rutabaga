@@ -8,7 +8,8 @@ const root_path = '/'
 const users_path = '/users'
 
 let app = express()
-app.use(bodyParser.text());
+// app.use(bodyParser.json());
+app.use(bodyParser.json({ type: '*/*' }));
 
 let users = []
 
