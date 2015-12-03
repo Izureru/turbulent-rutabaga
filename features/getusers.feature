@@ -6,9 +6,20 @@ Scenario: Get root
     Then the response status should be "200"
     And the response body should contain "Hello TDD!"
 
+# Scenario: Add user
+# 	Given I send a POST request to "/users" with the following:
+#       | name  | Albert |
+#   Then the response status should be "200"
+#   When I send a GET request to "/"
+#   And the response body should contain "1 tdd users"
+
 Scenario: Add user
-	Given I send a POST request to "/users" with the following:
-    | user | body |
+  Given I send a POST request to "/users" with the following:
+    """
+      {
+      "name":"Albert"
+      }
+    """
   Then the response status should be "200"
   When I send a GET request to "/"
   And the response body should contain "1 tdd users"
